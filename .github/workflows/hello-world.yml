@@ -1,0 +1,10 @@
+name: Hello World
+
+on: push
+
+jobs: 
+    hello-job:
+        runs-on: ubuntu-24.04
+        steps: 
+          - name: Echo text
+            run: echo "Hello, world!"
