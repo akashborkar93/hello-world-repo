@@ -1,0 +1,28 @@
+name: matrix-configuration.yml
+
+on:
+  push:
+    workflow_dispatch:                      #This will give small pop to start the workflow
+
+jobs:
+  deploy:
+    strategy:
+      fail-fast: false
+      max-parallel: 2                      #This rule will ensure that 2 jobs run at a time.
+    matrix:
+      os: [ubuntu-latest, ubuntu-20.04, windows-latest]
+      images: [hello-world, alpine]
+      exclude:
+        - images: alpine
+          os: windows-latest
+      include:
+        - images: amd64/alpine
+          os: ubuntu-20.04
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Echo Docker Details
+        run: docker info
+
+      - name: Run Image on ${{ matrix.os }}
+        run: docker run ${{ matrix.images }}
+
