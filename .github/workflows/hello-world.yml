@@ -7,4 +7,4 @@ jobs:
         runs-on: ubuntu-24.04
         steps: 
           - name: Echo text
-            run: echo "Hello, world!"
+            run: echo "Hello, world!!"
