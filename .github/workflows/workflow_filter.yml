@@ -1,10 +1,21 @@
 name: Filter Pull Request Events
 
 on:
+    workflow_dispatch:
+
+    push:
+        branches:
+            - main
+            - '!feature/*'
     pull_request:
         types:
             - opened
             - closed
+        paths-ignore:
+            - 'docs/**'
+            - 'README.md'
+        branches:
+            - main
 
 jobs:
     filter-events:
