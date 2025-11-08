@@ -1,0 +1,23 @@
+name: matrix-workflow
+
+on:
+  workflow_dispatch:
+
+# create a matrix job with ubuntu-latest and windows-latest
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Print OS
+        run: echo "Running on ${{ matrix.os }}"
+            
+    
+
+
