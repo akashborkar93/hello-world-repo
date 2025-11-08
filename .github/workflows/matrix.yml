@@ -20,6 +20,7 @@ on:
             
 jobs:
     deploy:
+        runs-on: ${{ matrix.os }}
         strategy:
             fail-fast: false
             max-parallel: 2
@@ -32,13 +33,14 @@ jobs:
                 include:
                   - os: ubuntu-latest
                     images: amd64/alpine
-        runs-on: ${{ matrix.os }}
         steps:
-            - name: Echo docker details
-              run: docker info
-            - name: Run images on ${{ matrix.os }}
-              run: |
+          - name: Run images on ${{ matrix.os }}
+            run: |
+              if [ "${{ matrix.images }}" = "hello-world" ] || [ "${{ matrix.images }}" = "amd64/alpine" ]; then
+                docker run --rm "${{ matrix.images }}"
+              else
                 docker run --rm "${{ matrix.images }}" echo "Running ${{ matrix.images }} on ${{ matrix.os }}"
+              fi
 
 
 
