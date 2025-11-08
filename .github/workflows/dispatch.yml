@@ -27,6 +27,9 @@ on:
 jobs:
   log-the-inputs:
     runs-on: ubuntu-latest
+    concurrency: 
+        group: manual-dispatch-workflow
+        cancel-in-progress: true
     steps:
       - run: |
           echo "Log level: $LEVEL"
